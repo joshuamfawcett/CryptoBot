@@ -12,15 +12,14 @@ from utils import *
 
 alphabet = string.ascii_lowercase
 
-
 class caesar(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    async def caesar(self, ctx, key: typing.Optional[int] = None,*,  arg):
+    async def caesar(self, ctx):
 
-        await ctx.send(f"```{caesar(arg,key)}```")
+        await ctx.send('''https://tenor.com/Qlz3.gif''')
 
 def setup(bot):
     bot.add_cog(caesar(bot))
