@@ -1,37 +1,43 @@
-## Welcome to GitHub Pages
+<h1 align="center">CryptoBot</h1>
 
-You can use the [editor on GitHub](https://github.com/joshuamfawcett/CryptoBot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<p align="center">
+  <a href="https://discord.gg/9NwYE8u2S9">
+    <img src="https://discordapp.com/api/guilds/848290586527793182/widget.png?style=shield" alt="Discord Server">
+  </a>
+  <a href="https://www.python.org/downloads/">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/Red-Discordbot">
+  </a>
+  <a href="https://github.com/Rapptz/discord.py/">
+     <img src="https://img.shields.io/badge/discord-py-blue.svg" alt="discord.py">
+  </a>
+</p>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<p align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#plugins">Plugins</a>
+  •
+  <a href="#join-the-community">Community</a>
+</p>
 
-### Markdown
+# Overview
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+CryptoBot is a fully modular bot – meaning all features and commands can be enabled/disabled to your
+liking, making it completely customizable to suit your needs. 
 
-```markdown
-Syntax highlighted code block
+This is a *self-hosted bot* – meaning you will need to host and maintain your own instance.  
 
-# Header 1
-## Header 2
-### Header 3
+# Plugins
 
-- Bulleted
-- List
+CryptoBot is fully modular, allowing you to load and unload cogs of your choice. A few examples are:
 
-1. Numbered
-2. List
+- Caesar Cipher
+- Vigenere Cipher
 
-**Bold** and _Italic_ and `Code` text
+# Join the community!
 
-[Link](url) and ![Image](src)
-```
+**CryptoBot** is being continually developed, and it’s supported by an active community which produces new
+content (cogs/plugins) for everyone to enjoy. New features are constantly added. If you can’t
+find the cog you’re looking for, why not make your own?
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/joshuamfawcett/CryptoBot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Join us on our [Official Discord Server](https://discord.gg/9NwYE8u2S9)!
