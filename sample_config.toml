@@ -1,0 +1,11 @@
+[core]
+# name for the bot
+name = "CryptoBot"
+# set a prefix for the bot to listen for
+prefix = "!"
+# enter your Discord application token here
+token = ""
+# enter the Discord of the bots owner here, if not set will get from developer info
+owner = ""
+# this is the version of the bot, do not change this
+version = "0.0.1 alpha"

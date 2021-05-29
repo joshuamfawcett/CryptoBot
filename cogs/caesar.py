@@ -1,25 +1,44 @@
-# -*- coding: utf-8 -*-
-
 from discord.ext import commands
-import discord
-import time
-import string
-import re
 import typing
-import asyncio
-import sys; sys.path.append("..") # Recognize /utils as a package
-from utils import *
 
-alphabet = string.ascii_lowercase
 
-class caesar(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+def caesar(text, s):
+    if s != None:
+        result = ""
+        s = 26 - s
+        for i in range(0, len(text)):
+            char = text[i]
+            if char.isalpha():
+                if char != " ":
+                    if (char.isupper()):
+                        result += chr((ord(char) + s - 65) % 26 + 65)
 
-    @commands.command()
-    async def caesar(self, ctx):
+                    else:
+                        result += chr((ord(char) + s - 97) % 26 + 97)
+                else:
+                    result = result + char
+            else:
+                result += char
+        return result
+    else:
+        output_l = []
+        for i in range(1, 26):
+            decrypt = caesar(text, i)
+            output_l.append(f"Key = {i}: {decrypt}")
+        outp = ''
+        for i in output_l:
+            outp = outp + i + "\n"
+        return outp
 
-        await ctx.send('''https://tenor.com/Qlz3.gif''')
+
+class Caesar(commands.Cog):
+	def __init__(self, bot):
+		self.bot = bot
+
+	@commands.command()
+	async def caesar(self, ctx, key: typing.Optional[int] = None, *, arg):
+		await ctx.send(f"```{caesar(arg, key)}```")
+
 
 def setup(bot):
-    bot.add_cog(caesar(bot))
+	bot.add_cog(Caesar(bot))

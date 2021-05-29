@@ -1,7 +1,5 @@
-import string
 import base64 as b64
 import string
-import re
 
 alphabet = string.ascii_lowercase
 alphabet_upper = alphabet.upper()
@@ -36,97 +34,11 @@ tap_code_dict={'A':'. .' , 'B':'. ..', 'C':'. ...','K':'. ...', 'D':'. ....' , '
             ,'V':'..... .','W':'..... ..', 'X':'..... ...', 'Y':'..... ....' , 'Z':'..... .....', ' ':'/ /'}
 
 
-
-def atbash(text):
-	if text==None:
-		response="You didn't enter the test. Please enter the command with the text"
-		return response
-	else:
-		alphabets=list(string.ascii_lowercase)
-		decrypt=''
-		for i in text:
-				try:
-						decrypt=decrypt+(alphabets[25-alphabets.index(i.lower())])
-				except:
-						decrypt=decrypt+str(i)
-		return decrypt
-
-
-
-def caesar(text,s):
-		if s != None:
-			result = ""
-			s=26-s
-			for i in range(0,len(text)):
-					char = text[i]
-					if char.isalpha():
-							if char != " ":
-									if (char.isupper()):
-											result += chr((ord(char) + s-65) % 26 + 65)
-
-									else:
-											result += chr((ord(char) + s - 97) % 26 + 97)
-							else:
-									result=result+ char
-					else:
-							result += char
-			return result
-		else:
-			output_l=[]
-			for i in range(1,26):
-					decrypt=caesar(text,i)
-					output_l.append(f"Key = {i}: {decrypt}")
-			outp=''
-			for i in output_l:
-					outp=outp+i+"\n"
-			return outp
-
-
-
-def vigenere(text, key, mode):
-	if key != None and text != None:
-		lowercase = text.lower()
-		encrypted = ''
-		index = None
-		counter = 0
-		alphabet = string.ascii_lowercase
-		alphabet_upper=alphabet.upper()
-		# First do the shifting thingy
-		for char in lowercase:
-			# Make sure the index does not exceed the key's length
-			if counter == len(key): counter = 0
-
-			if char not in alphabet:
-				encrypted += char
-			else:
-				index = alphabet.index(char)
-
-				if mode == 'encrypt':
-					index += alphabet.index(key[counter])
-				else:
-					index -= alphabet.index(key[counter])
-
-				index %= len(alphabet)
-				encrypted += alphabet[index]
-				counter += 1
-
-		# Restore cases
-		for x in range(len(encrypted)):
-			encrypted = list(encrypted)
-			if text[x] in alphabet_upper:
-				encrypted[x] = encrypted[x].upper()
-
-		return ''.join(encrypted)
-	else:
-		response="You have not entered the key or the code. Please enter the command with the key as well as the text to be decoded/encoded"
-		return response
-
-
 def base64(arg, mode):
   if mode == 'decode':
     padding_needed = len(arg) % 4
     if padding_needed:
-      arg += '===' # See https://stackoverflow.com/a/49459036/14437456
+      arg += '==='
     decrypt = b64.b64decode(arg).decode('utf-8')
     return decrypt
 
@@ -276,28 +188,3 @@ def null(string):
         if word[x].isalpha(): res += word[x]; break
 
     return res
-
-def polybius_encrypt(string, square):
-  string = re.sub(r'[^A-Za-z]', '', string)
-  string = string.lower()
-
-  encrypted = []
-  for i in string:
-    n = square.find(i) + 1
-    row,col = divmod(n,5)
-    encrypted.append(str(row+1)+str(col))
-
-
-  return ' '.join(encrypted)
-
-def polybius_decrypt(string, square):
-  plain = []
-  string = string.split()
-
-  for i in range(len(string)):
-      row = int(string[i][0])
-      col = int(string[i][1])
-      letter = square[(row-1)*5 + col-1]
-      plain.append(letter)
-
-  return ''.join(plain)

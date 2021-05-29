@@ -1,17 +1,37 @@
-from discord.ext import commands
 import discord
-import time
-import string
 import re
-import typing
-import asyncio
-import sys; sys.path.append("..") # Recognize /utils as a package
+from discord.ext import commands
 from utils import *
 
 alphabet = string.ascii_lowercase
 
 
-class polybius(commands.Cog):
+def polybius_encrypt(string, square):
+  string = re.sub(r'[^A-Za-z]', '', string)
+  string = string.lower()
+
+  encrypted = []
+  for i in string:
+    n = square.find(i) + 1
+    row, col = divmod(n, 5)
+    encrypted.append(str(row + 1) + str(col))
+
+  return ' '.join(encrypted)
+
+
+def polybius_decrypt(string, square):
+  plain = []
+  string = string.split()
+
+  for i in range(len(string)):
+    row = int(string[i][0])
+    col = int(string[i][1])
+    letter = square[(row - 1) * 5 + col - 1]
+    plain.append(letter)
+
+  return ''.join(plain)
+
+class Polybius(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -54,15 +74,12 @@ class polybius(commands.Cog):
         await msg.add_reaction('4️⃣')
         await msg.add_reaction('5️⃣')
 
-
         reaction, user = await self.bot.wait_for('reaction_add', timeout=20.0, check=checkg)
         if str(reaction.emoji) == '1️⃣': square = alphabet.replace('j', '')
         elif str(reaction.emoji) == '2️⃣': square = alphabet.replace('v', '')
         elif str(reaction.emoji) == '3️⃣': square = alphabet.replace('w', '')
         elif str(reaction.emoji) == '4️⃣': square = alphabet.replace('q', '')
         elif str(reaction.emoji) == '5️⃣': square = alphabet.replace('z', '')
-
-
 
         await ctx.send(f'✅ Your alphabet is: **{square}**')
 
@@ -85,7 +102,7 @@ class polybius(commands.Cog):
           msgi = msgii
 
 
-        msgii = "".join(dict.fromkeys(msgi)) # See https://stackoverflow.com/a/9841328/14437456
+        msgii = "".join(dict.fromkeys(msgi))  # See https://stackoverflow.com/a/9841328/14437456
 
         if msgi != msgii:
           await ctx.send(f'⚠ Warning: Your key contains duplicate letters. We have removed the duplicate letters from the key and the key is now: ```{msgii}```')
@@ -157,9 +174,7 @@ class polybius(commands.Cog):
       def check(m):
         return m.author == ctx.author and m.channel == msg.channel
 
-
       reaction, user = await self.bot.wait_for('reaction_add', timeout=20.0, check=checkg)
-
 
       if str(reaction.emoji) == '1️⃣':
         embed = discord.Embed(title="Polybius Cipher: ", description="Select Alphabet Presets", color=discord.Color(0x39ff14))
@@ -176,15 +191,12 @@ class polybius(commands.Cog):
         await msg.add_reaction('4️⃣')
         await msg.add_reaction('5️⃣')
 
-
         reaction, user = await self.bot.wait_for('reaction_add', timeout=20.0, check=checkg)
         if str(reaction.emoji) == '1️⃣': square = alphabet.replace('j', '')
         elif str(reaction.emoji) == '2️⃣': square = alphabet.replace('v', '')
         elif str(reaction.emoji) == '3️⃣': square = alphabet.replace('w', '')
         elif str(reaction.emoji) == '4️⃣': square = alphabet.replace('q', '')
         elif str(reaction.emoji) == '5️⃣': square = alphabet.replace('z', '')
-
-
 
         await ctx.send(f'✅ Your alphabet is: **{square}**')
 
@@ -206,8 +218,7 @@ class polybius(commands.Cog):
           await ctx.send(f'⚠ Warning: Your key contains non-alphabet characters. We have removed the non-alphabet characters from the key and the key is now:  ```{msgii}```')
           msgi = msgii
 
-
-        msgii = "".join(dict.fromkeys(msgi)) # See https://stackoverflow.com/a/9841328/14437456
+        msgii = "".join(dict.fromkeys(msgi))
 
         if msgi != msgii:
           await ctx.send(f'⚠ Warning: Your key contains duplicate letters. We have removed the duplicate letters from the key and the key is now: ```{msgii}```')
@@ -236,14 +247,12 @@ class polybius(commands.Cog):
 
         msgi = msgi.lower()
 
-
         msgii = re.sub(r'[^A-Za-z]', '', msgi)
         if msgi != msgii:
           await ctx.send(f'⚠ Warning: Your alphabet contains non-alphabet characters. We have removed the non-alphabet characters from the alphabet and the alphabet is now:  ```{msgii}```')
           msgi = msgii
 
-
-        msgii = "".join(dict.fromkeys(msgi)) # See https://stackoverflow.com/a/9841328/14437456
+        msgii = "".join(dict.fromkeys(msgi))
 
         if msgi != msgii:
           await ctx.send(f'⚠ Warning: Your alphabet contains duplicate letters. We have removed the duplicate letters from the alphabet and the alphabet is now: ```{msgii}```')
@@ -254,6 +263,7 @@ class polybius(commands.Cog):
 
         square = msgi
       await ctx.send(f'```{polybius_decrypt(arg, square)}```')
-      
+
+
 def setup(bot):
-    bot.add_cog(polybius(bot))
+    bot.add_cog(Polybius(bot))

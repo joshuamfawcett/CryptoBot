@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from discord.ext import commands
-import discord
 import time
 
-class debug(commands.Cog):
+
+class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -22,6 +20,5 @@ class debug(commands.Cog):
         await ctx.send(f"{len(ctx.bot.guilds)}")
 
 
-
 def setup(bot):
-    bot.add_cog(debug(bot))
+    bot.add_cog(Debug(bot))
