@@ -70,6 +70,9 @@ bot.load_extension("cogs.debug")
 print('Loading UserInfo cog...')
 bot.load_extension("cogs.userinfo")
 
+print('Loading Atbash cipher cog...')
+bot.load_extension("cogs.atbash")
+
 print('Loading Caesar cipher cog...')
 bot.load_extension("cogs.caesar")
 
