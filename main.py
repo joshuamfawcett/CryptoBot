@@ -25,6 +25,13 @@ bot = commands.Bot(command_prefix)
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}!')
+    print('Bot ID:', bot.user.id)
+    print('Discord.py Version:', discord.__version__)
+    print('-----------------------')
+    print('Servers connected to:')
+    for guild in bot.guilds:
+        print('-', guild.name)
+    print('-----------------------')
     activity = discord.Game(name=f"Currently on {len(bot.guilds)} servers")
     await bot.change_presence(activity=activity)
 
@@ -39,10 +46,6 @@ async def on_guild_join(self):
 async def on_guild_remove():
     activity = discord.Game(name=f"Currently on {len(bot.guilds)} servers")
     await bot.change_presence(activity=activity)
-
-
-# print('Loading Atbash cipher cog...')
-# bot.load_extension("cogs.atbash")
 
 
 print("""
@@ -70,10 +73,15 @@ bot.load_extension("cogs.userinfo")
 print('Loading Caesar cipher cog...')
 bot.load_extension("cogs.caesar")
 
+print('Loading Morse cipher cog...')
+bot.load_extension("cogs.morse")
+
 print('Loading Polybius cipher cog...')
 bot.load_extension("cogs.polybius")
 
 print('Loading Vigenere cipher cog...')
 bot.load_extension("cogs.vigenere")
+
+print('-----------------------')
 
 bot.run(config['core']['token'])

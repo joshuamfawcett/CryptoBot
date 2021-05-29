@@ -18,9 +18,6 @@ class others(commands.Cog):
     async def base64_encode(self, ctx,*, arg):
         await ctx.send(f'```{base64(arg, "encode")}```')
 
-    @commands.command()
-    async def morse(self, ctx,*, arg):
-        await ctx.send(f'```{morse(arg)}```')
 
     @commands.command()
     async def tap(self, ctx,*, arg):
