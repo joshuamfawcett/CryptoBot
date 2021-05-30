@@ -1,6 +1,14 @@
 import discord
 from discord.ext import commands
 import toml
+import logging
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
+
 
 config = toml.load('config.toml')
 
@@ -32,19 +40,19 @@ async def on_ready():
     for guild in bot.guilds:
         print('-', guild.name)
     print('-----------------------')
-    activity = discord.Game(name=f"Currently on {len(bot.guilds)} servers")
+    activity = discord.Game(name=f"Currently in {len(bot.guilds)} servers")
     await bot.change_presence(activity=activity)
 
 
 @bot.event
 async def on_guild_join(self):
-    activity = discord.Game(name=f"Currently on {len(bot.guilds)} servers")
+    activity = discord.Game(name=f"Currently in {len(bot.guilds)} servers")
     await bot.change_presence(activity=activity)
 
 
 @bot.event
 async def on_guild_remove():
-    activity = discord.Game(name=f"Currently on {len(bot.guilds)} servers")
+    activity = discord.Game(name=f"Currently in {len(bot.guilds)} servers")
     await bot.change_presence(activity=activity)
 
 
@@ -78,6 +86,9 @@ bot.load_extension("cogs.caesar")
 
 print('Loading Morse cipher cog...')
 bot.load_extension("cogs.morse")
+
+print('Loading A1z26 cipher cog...')
+bot.load_extension("cogs.a1z26")
 
 print('Loading Polybius cipher cog...')
 bot.load_extension("cogs.polybius")
