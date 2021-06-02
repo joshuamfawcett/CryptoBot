@@ -12,6 +12,8 @@ logger.addHandler(handler)
 
 config = toml.load('config.toml')
 
+owner_id = config['core']['owner']
+
 
 def command_prefix(bot, message):
     if message.guild is None:
@@ -66,14 +68,21 @@ print("""
               (____/|_|                                 
 """)
 print("Version:", config['core']['version'])
+
 # print('Loading Help cog...')
 # bot.load_extension("cogs.help")
 
-print('Loading Others cog...')
-bot.load_extension("cogs.others")
-
 print('Loading Debug cog...')
 bot.load_extension("cogs.debug")
+
+#print('Loading Music cog...')
+#bot.load_extension("cogs.music")
+
+print('Loading Moderation cog...')
+bot.load_extension("cogs.moderation")
+
+print('Loading Others cog...')
+bot.load_extension("cogs.others")
 
 print('Loading UserInfo cog...')
 bot.load_extension("cogs.userinfo")

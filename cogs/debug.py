@@ -7,6 +7,7 @@ class Debug(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.has_role("Staff")
     async def ping(self, ctx):
         """ Pong! """
         before = time.monotonic()
@@ -16,8 +17,9 @@ class Debug(commands.Cog):
         await message.edit(content=f"🏓 WS: {before_ws}ms  |  REST: {int(ping)}ms")
 
     @commands.command()
+    @commands.has_role("Staff")
     async def servers(self, ctx):
-        await ctx.send(f"{len(ctx.bot.guilds)}")
+        await ctx.send(ctx.bot.guilds)
 
 
 def setup(bot):

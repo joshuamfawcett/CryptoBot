@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 # Config File
 config.toml
+cogs/custom.py
 # IDE Files
 .idea
